@@ -1,0 +1,9 @@
+/node_modules
+/.vscode
+/build
+
+.env
+.dockerignore
+Dockerfile
+fly.toml
+test.rest

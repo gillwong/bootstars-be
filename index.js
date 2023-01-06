@@ -3,14 +3,19 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import { Course, Group } from "./models/course.js";
+import { fileURLToPath } from "url";
+import path, { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 dotenv.config();
 const app = express();
 app.use(cors());
-app.use(express.static("build"));
+app.use("/", express.static(path.join(__dirname, "build")));
 app.use(express.json());
 
-
+// API Routes
 app.get("/api/courses", (request, response, next) => {
   Course.find({})
     .then(courses => response.json(courses))
@@ -65,6 +70,11 @@ app.delete("/api/courses/:code", (request, response, next) => {
   Course.deleteMany({ code: request.params.code })
     .then(() => response.status(204).end())
     .catch(err => next(err));
+})
+
+// Static Routes
+app.get("*", (request, response) => {
+  response.sendFile(path.resolve(__dirname, "build", "index.html"));
 })
 
 const PORT = process.env.PORT || 8080

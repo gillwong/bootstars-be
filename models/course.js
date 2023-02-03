@@ -1,19 +1,9 @@
-import dotenv from "dotenv";
 import mongoose from "mongoose";
 
-dotenv.config();
-const URL = process.env.MONGODB_URI;
-
-console.log(`Connecting to ${URL}`);
-
-mongoose.connect(URL)
-  .then(() => console.log("Connected to MongoDB"))
-  .catch(err => console.error("Error connecting to MongoDB:", err.message));
-
-const removeIdV = ret => {
-  ret.id = ret._id.toString();
-  delete ret._id;
-  delete ret.__v;
+const removeIdV = returnedObj => {
+  returnedObj.id = returnedObj._id.toString();
+  delete returnedObj._id;
+  delete returnedObj.__v;
 };
 
 const groupSchema = new mongoose.Schema({

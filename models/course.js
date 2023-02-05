@@ -75,8 +75,9 @@ const courseSchema = new mongoose.Schema({
     enum: ["Letter-Graded", "Pass/Fail"],
     required: true
   },
-  prereq: [String],
-  exclusive: [String],
+  prereq: String,
+  prereqNote: String,
+  exclusive: String,
   programmeExclude: String,
   ayExclude: String,
   bde: {
@@ -85,6 +86,11 @@ const courseSchema = new mongoose.Schema({
     required: true
   },
   gerpe: {
+    type: Boolean,
+    default: true,
+    required: true
+  },
+  ue: {
     type: Boolean,
     default: true,
     required: true

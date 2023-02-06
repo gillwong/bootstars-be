@@ -30,7 +30,8 @@ const groupSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  remark: String
+  remark: String,
+  teachingWeeks: [Number]
 });
 
 groupSchema.set("toJSON", { transform: (doc, ret) => removeIdV(ret) });
